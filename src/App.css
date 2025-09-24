@@ -1,0 +1,96 @@
+/* App shell */
+.app-shell {
+  min-height: 100dvh;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(1200px 600px at 10% -10%, rgba(100, 108, 255, 0.25) 0%, rgba(100, 108, 255, 0) 60%),
+    radial-gradient(1000px 500px at 110% 10%, rgba(0, 255, 200, 0.2) 0%, rgba(0, 255, 200, 0) 60%),
+    linear-gradient(180deg, rgba(15, 17, 26, 0.9) 0%, rgba(9, 10, 15, 0.9) 100%);
+}
+
+/* Game selection */
+.game-selection {
+  width: min(1200px, 100%);
+  position: relative;
+}
+
+.game-selection__header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.game-selection__title {
+  margin: 0 0 4px 0;
+  font-size: clamp(24px, 4vw, 40px);
+  letter-spacing: 0.02em;
+}
+
+/* Simple responsive grid */
+/* Horizontal rail that shows exactly 4 items on desktop */
+.game-rail__wrap { position: relative; display: flex; align-items: center; gap: 8px; }
+.game-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 24px * 3) / 4);
+  gap: 24px;
+  overflow-x: auto;
+  padding: 8px 4px 16px 4px;
+  scroll-snap-type: x mandatory;
+}
+.game-rail__item { scroll-snap-align: start; }
+
+.game-rail__nav {
+  appearance: none;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  width: 36px; height: 36px; border-radius: 10px;
+  display: grid; place-items: center;
+  cursor: pointer;
+}
+.game-rail__nav:hover { background: rgba(255,255,255,0.12); }
+.game-rail__nav--prev { margin-right: 4px; }
+.game-rail__nav--next { margin-left: 4px; }
+
+/* On small screens, show 1-2 items */
+@media (max-width: 639px) {
+  .game-rail { grid-auto-columns: 85%; gap: 16px; }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .game-rail { grid-auto-columns: calc((100% - 20px) / 2); gap: 20px; }
+}
+
+/* Game card */
+.game-card {
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+  outline: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  transition: transform 200ms ease, box-shadow 200ms ease, outline-color 200ms ease;
+}
+.game-card:focus-visible { outline: 2px solid #00e0b8; }
+.game-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.45); }
+
+.game-card__image-wrap { position: relative; aspect-ratio: 16/10; overflow: hidden; }
+.game-card__image { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.game-card__content { padding: 14px 14px 16px; }
+.game-card__title { margin: 0 0 8px 0; font-size: 18px; letter-spacing: 0.2px; }
+.game-card__meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.game-card__badge {
+  padding: 6px 10px; border-radius: 999px; font-size: 12px;
+  background: linear-gradient(90deg, rgba(100,108,255,0.2), rgba(0,224,184,0.2));
+  outline: 1px solid rgba(255,255,255,0.12);
+}
+.game-card__players { color: #b8c1cc; font-size: 12px; }
+
+/* Grid handles responsiveness; no rail breakpoints needed */
